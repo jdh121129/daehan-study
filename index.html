@@ -762,9 +762,20 @@
         
         window.addEventListener('keydown', (e) => { if(e.code === 'Space' && isStudying) { e.preventDefault(); addCount('manual', 1); } });
         setInterval(updateTopBar, 1000); updateTopBar();
+   function minusAnyCount() {
+    if(!isStudying) return;
+    if(stats.clapProblems > 0) {
+        stats.clapProblems--;
+    } else if(stats.manualProblems > 0) {
+        stats.manualProblems--;
+    }
+    updateDisplay();
+    saveTempSession();
+}
     </script>
 </body>
 </html>
+
 
 
 
