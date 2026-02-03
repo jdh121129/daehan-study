@@ -3,63 +3,765 @@
 <head>
 <link rel="icon" href="logo.png.jpg">
 <link rel="apple-touch-icon" href="logo.png.jpg">
-<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>대한 STUDY - 친구들과 함께</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="https://www.youtube.com/iframe_api"></script>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
-    body{font-family:'Noto Sans KR',sans-serif;background-color:#f0f7f6;overflow:hidden;margin:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent}.miku-bg{background-color:#39c5bb}.miku-text{color:#39c5bb}.tab-content{animation:fadeIn 0.3s cubic-bezier(0.4,0,0.2,1)}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}#bg-layer{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;transition:background 0.5s ease}@keyframes fall-rotate{0%{transform:translateY(-10vh) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(360deg);opacity:0}}@keyframes fall-straight{0%{transform:translateY(-10vh);opacity:0.7}100%{transform:translateY(110vh);opacity:0.3}}@keyframes fall-sway{0%{transform:translateY(-10vh) translateX(0px);opacity:0.9}50%{transform:translateY(50vh) translateX(20px);opacity:0.8}100%{transform:translateY(110vh) translateX(-20px);opacity:0}}.particle{position:absolute;top:-10%;user-select:none;pointer-events:none}.glass-card{background:rgba(255,255,255,0.9);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.8);box-shadow:0 8px 32px 0 rgba(31,38,135,0.15)}@keyframes flash{0%{background-color:rgba(57,197,187,0.3)}100%{background-color:transparent}}.flash-effect{animation:flash 0.2s ease-out}::-webkit-scrollbar{width:0px;background:transparent}input[type=range]{accent-color:#39c5bb}details>summary{list-style:none;cursor:pointer;transition:0.2s}details>summary::-webkit-details-marker{display:none}details[open]>summary{color:#39c5bb;margin-bottom:10px}select{appearance:none;background-image:url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2339c5bb%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-position:right 1rem top 50%;background-size:0.65rem auto}
-</style>
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>대한 STUDY - 친구들과 함께</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+        
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; 
+            background-color: #f0f7f6; 
+            overflow: hidden; 
+            margin: 0; 
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .miku-bg { background-color: #39c5bb; }
+        .miku-text { color: #39c5bb; }
+        .tab-content { animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; transition: background 0.5s ease; }
+        
+        /* 계절별 파티클 애니메이션 */
+        @keyframes fall-rotate {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+        @keyframes fall-straight {
+            0% { transform: translateY(-10vh); opacity: 0.7; }
+            100% { transform: translateY(110vh); opacity: 0.3; }
+        }
+        @keyframes fall-sway {
+            0% { transform: translateY(-10vh) translateX(0px); opacity: 0.9; }
+            50% { transform: translateY(50vh) translateX(20px); opacity: 0.8; }
+            100% { transform: translateY(110vh) translateX(-20px); opacity: 0; }
+        }
+        
+        .particle { position: absolute; top: -10%; user-select: none; pointer-events: none; }
+        
+        .exam-mode-bg { 
+            background: linear-gradient(rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.9)), url('https://img.freepik.com/premium-photo/anime-boy-studying-with-glasses-sitting-desk-with-books-lamp-night_713600-1111.jpg');
+            background-size: cover; background-position: center; 
+        }
+
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255,255,255,0.8); 
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        @keyframes flash { 0% { background-color: rgba(57, 197, 187, 0.3); } 100% { background-color: transparent; } }
+        .flash-effect { animation: flash 0.2s ease-out; }
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+        input[type=range] { accent-color: #39c5bb; }
+        
+        details > summary { list-style: none; cursor: pointer; transition: 0.2s; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] > summary { color: #39c5bb; margin-bottom: 10px; }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2339c5bb%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem top 50%;
+            background-size: 0.65rem auto;
+        }
+    </style>
 </head>
 <body>
-<noscript><div style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:99999;display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center;"><h1 style="color:#39c5bb;font-family:'Noto Sans KR',sans-serif;font-size:30px;margin-bottom:20px;">앗! 자바스크립트가 꺼져있어! 🎵</h1><p style="color:#555;font-size:18px;">미쿠와 공부하려면 브라우저 설정에서<br>자바스크립트를 꼭 켜줘! (｡♥‿♥｡)</p></div></noscript>
-<div id="bg-layer"></div>
-<header class="fixed top-0 left-0 w-full h-12 lg:h-14 flex items-center justify-between px-5 lg:px-8 z-[100] bg-white/80 backdrop-blur-md border-b border-white/50 shadow-sm">
-<div id="top-date" class="font-black text-slate-500 text-xs uppercase tracking-wider"></div>
-<div class="absolute left-1/2 -translate-x-1/2 text-center"><div id="user-greeting" class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">GUEST</div><div id="top-time" class="miku-text text-xl lg:text-2xl font-black tracking-widest leading-none"></div></div>
-<div class="flex gap-2 text-xs font-bold text-slate-400"><button onclick="logout()" class="hover:text-rose-500 transition-colors" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button></div>
-</header>
-<div id="lock-screen" class="fixed inset-0 miku-bg flex items-center justify-center z-[110] px-4 transition-transform duration-500">
-<div class="bg-white/95 backdrop-blur-xl p-8 lg:p-12 rounded-[30px] shadow-2xl w-full max-w-sm text-center relative">
-<div id="login-view"><div class="absolute top-4 right-6 text-[10px] font-black text-slate-300">제작자: 장대한</div><button onclick="toggleAuthMode()" class="absolute top-4 left-6 text-xs font-bold text-teal-600 hover:text-teal-800 bg-teal-50 px-3 py-1 rounded-full"><i class="fas fa-user-plus"></i> 회원가입</button><h1 class="text-2xl font-black text-slate-800 mb-2 tracking-tighter uppercase mt-6">DAEHAN STUDY</h1><p class="text-rose-500 font-black text-sm mb-6 animate-pulse">친구들아 열공하자! 🔥</p><div class="text-left mb-1 ml-1"><span class="text-[10px] font-black text-slate-500 uppercase">ID</span></div><input type="text" id="login-id" class="w-full p-4 bg-slate-100 rounded-2xl mb-4 text-center font-bold outline-none border-2 border-transparent focus:border-teal-400 placeholder-slate-300" placeholder="아이디"><div class="text-left mb-1 ml-1"><span class="text-[10px] font-black text-slate-500 uppercase">Password</span></div><input type="password" id="login-pw" class="w-full p-4 bg-slate-100 rounded-2xl mb-6 text-center font-bold outline-none border-2 border-transparent focus:border-teal-400 placeholder-slate-300" placeholder="비밀번호"><button onclick="checkLogin()" class="w-full miku-bg text-white py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-transform">로그인 & 입장 🚀</button></div>
-<div id="register-view" class="hidden"><button onclick="toggleAuthMode()" class="absolute top-4 left-4 text-xs font-bold text-slate-400 hover:text-slate-600"><i class="fas fa-arrow-left"></i> 뒤로가기</button><h2 class="text-xl font-black text-slate-800 mb-6 tracking-tighter uppercase mt-4">NEW ACCOUNT</h2><div class="text-left mb-1 ml-1"><span class="text-[10px] font-black text-slate-500 uppercase">New ID</span></div><input type="text" id="reg-id" class="w-full p-3 bg-slate-100 rounded-2xl mb-3 text-center font-bold outline-none border-2 border-transparent focus:border-teal-400 placeholder-slate-300" placeholder="사용할 아이디"><div class="text-left mb-1 ml-1"><span class="text-[10px] font-black text-slate-500 uppercase">New Password</span></div><input type="password" id="reg-pw" class="w-full p-3 bg-slate-100 rounded-2xl mb-2 text-center font-bold outline-none border-2 border-transparent focus:border-teal-400 placeholder-slate-300" placeholder="비밀번호 설정"><p class="text-[10px] text-rose-500 font-bold mb-6 text-left ml-2">* 5자리 이상<br>* 영문 + 특수문자(!@#$ 등) 필수</p><button onclick="registerUser()" class="w-full bg-indigo-500 text-white py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-transform">계정 만들기 ✨</button></div>
-</div></div>
-<div id="main-app" class="hidden h-screen flex flex-col lg:flex-row pt-12 lg:pt-14 overflow-hidden relative">
-<main id="main-content" class="flex-1 p-4 lg:p-8 overflow-y-auto z-10 pb-24 lg:pb-8 scroll-smooth">
-<div id="tab-home" class="tab-content max-w-4xl mx-auto space-y-6"><div class="glass-card p-6 lg:p-10 rounded-[30px] text-center shadow-lg relative overflow-hidden"><div id="dday-tag" class="inline-block px-4 py-1.5 rounded-full miku-bg text-white text-[11px] font-black mb-4 uppercase shadow-md tracking-wider"></div><h2 class="text-2xl lg:text-4xl font-black text-slate-800 mb-2" id="home-welcome-msg">오늘도 파이팅!</h2><div class="grid grid-cols-2 gap-4 mb-6"><div class="bg-white/60 p-4 rounded-2xl border border-white"><p class="text-[10px] font-black text-slate-400 mb-1 uppercase">Today Problems</p><p class="text-4xl lg:text-5xl font-black miku-text" id="home-total-problems">0</p></div><div class="bg-white/60 p-4 rounded-2xl border border-white"><p class="text-[10px] font-black text-slate-400 mb-1 uppercase">Avg Pace</p><p class="text-4xl lg:text-5xl font-black text-orange-400" id="home-avg-pace">0.0</p></div></div><div class="mb-8"><button onclick="showDailyQuote()" class="bg-slate-100 text-slate-600 px-6 py-3 rounded-xl font-bold text-xs hover:bg-teal-50 hover:text-teal-600 transition-all shadow-sm border border-slate-200">📜 오늘의 명언은?</button><div id="quote-area" class="hidden mt-4 p-4 bg-teal-50 rounded-2xl border border-teal-100 animate-fadeIn"><p id="quote-text" class="text-sm lg:text-base font-black text-slate-700 leading-relaxed"></p></div></div><div class="aspect-video bg-black rounded-[20px] overflow-hidden shadow-2xl relative group"><div id="yt-player" class="absolute inset-0 w-full h-full"></div></div></div></div>
-<div id="tab-study" class="tab-content hidden max-w-md mx-auto relative"><div id="study-container" class="glass-card p-6 lg:p-10 rounded-[40px] shadow-2xl text-center border-2 border-white/50"><div class="mb-4"><label class="block text-left text-[10px] font-black text-slate-400 uppercase mb-1 ml-2">SUBJECT</label><select id="subject-select" onchange="changeSubject()" class="w-full p-3 rounded-2xl font-bold text-slate-700 bg-white border-2 border-slate-100 focus:border-teal-400 outline-none text-lg"><option value="국어">📚 국어</option><option value="수학">📐 수학</option><option value="영어">🔤 영어</option><option value="과학">🔬 과학</option><option value="사회">🌍 사회</option><option value="역사">⏳ 역사</option></select></div><div id="tool-box" class="mb-6 bg-slate-50 p-3 rounded-2xl border border-dashed border-slate-300"><div class="flex gap-2"><input type="text" id="tool-input" class="flex-1 p-2 rounded-xl border border-slate-200 text-sm focus:border-teal-400 outline-none" placeholder="단어/공식 검색"><button onclick="useTool()" class="bg-teal-500 text-white px-4 rounded-xl font-bold text-sm shadow-md hover:bg-teal-600"><i class="fas fa-search"></i></button></div><p id="tool-desc" class="text-[10px] text-slate-400 mt-1 text-left ml-1">국어사전에서 단어를 찾아보세요.</p></div><div id="iframe-container" class="hidden mt-4 rounded-2xl overflow-hidden border-2 border-teal-200 shadow-inner bg-white" style="height: 400px;"><div class="bg-teal-100 p-2 flex justify-between items-center text-[10px] font-bold"><span class="miku-text">MIKU SEARCH VIEW</span><button onclick="closeIframe()" class="text-rose-500 hover:text-rose-700"><i class="fas fa-times"></i> 닫기</button></div><iframe id="tool-iframe" src="" class="w-full h-full border-none"></iframe></div><div class="mb-8 relative"><div class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-2">Total Solved</div><div id="total-count-display" class="miku-text text-8xl lg:text-9xl font-black tracking-tighter leading-none">0</div></div><div class="flex justify-between items-center mb-8 bg-white/60 px-6 py-4 rounded-3xl border border-white"><div class="text-left"><p class="text-[10px] font-black text-slate-400 uppercase mb-1">Time</p><div id="timer" class="text-3xl font-black text-slate-700 font-mono">00:00</div></div><div class="h-8 w-px bg-slate-300"></div><div class="text-right"><p class="text-[10px] font-black text-slate-400 uppercase mb-1">Pace</p><p id="live-pace" class="text-3xl font-black miku-text animate-pulse">0.0</p></div></div><div class="grid grid-cols-2 gap-3 mb-6"><div class="bg-teal-50 p-3 rounded-2xl border border-teal-100 flex flex-col items-center justify-center"><span class="text-[10px] font-black text-teal-600 uppercase">Sound 🎤</span><span id="clap-count" class="text-2xl font-black text-teal-700">0</span></div><div class="bg-indigo-50 p-3 rounded-2xl border border-indigo-100 flex flex-col items-center justify-center"><span class="text-[10px] font-black text-indigo-600 uppercase">Click 🖱️</span><span id="manual-count" class="text-2xl font-black text-indigo-700">0</span></div></div><div class="flex gap-2 mb-6"><button onclick="minusAnyCount()" class="w-1/4 py-4 rounded-2xl font-black text-xl bg-slate-200 text-slate-600 shadow-md active:scale-95 transition-all hover:bg-slate-300" title="1개 취소"><i class="fas fa-minus"></i></button><button onclick="addCount('manual', 1)" class="w-3/4 py-4 rounded-2xl font-black text-xl bg-indigo-500 text-white shadow-lg active:scale-95 transition-all hover:bg-indigo-600"><i class="fas fa-plus mr-2"></i> 직접 풀었음</button></div><div class="bg-slate-100/50 p-4 rounded-3xl mb-6 border border-white"><div class="flex justify-between text-[10px] font-black text-slate-400 mb-2 uppercase"><span>Mic Sensitivity</span><span id="sens-value" class="text-teal-600">150</span></div><input type="range" id="sens-slider" min="1" max="200" value="150" class="w-full mb-3 cursor-pointer h-2 bg-slate-200 rounded-lg appearance-none"><div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden shadow-inner"><div id="audio-bar" class="h-full miku-bg transition-all duration-75 ease-out" style="width: 0%"></div></div></div><div class="flex gap-3"><button id="start-btn" onclick="startStudy()" class="flex-1 py-4 rounded-2xl font-black text-lg bg-teal-500 text-white shadow-lg active:scale-95 transition-all">시작</button><button id="end-btn" onclick="endStudyAndSave(true)" class="flex-1 py-4 rounded-2xl font-black text-lg bg-rose-500 text-white shadow-lg opacity-40 active:scale-95 transition-all" disabled>종료</button></div></div></div>
-<div id="tab-history" class="tab-content hidden max-w-3xl mx-auto"><div class="glass-card p-6 rounded-[30px] mb-6 flex justify-between items-center sticky top-0 z-20"><h3 class="text-xl font-black text-slate-800 uppercase tracking-tighter">History</h3><button onclick="clearAllData()" class="text-xs font-bold text-slate-400 border border-slate-200 px-3 py-2 rounded-full hover:bg-rose-50 hover:text-rose-500 hover:border-rose-200">전체 초기화</button></div><div id="history-list" class="space-y-4 pb-10"></div></div>
-<div id="tab-settings" class="tab-content hidden max-w-md mx-auto"><div class="glass-card p-8 rounded-[40px] shadow-lg space-y-8"><h3 class="text-2xl font-black text-slate-800 uppercase border-b pb-4">Settings</h3><div class="space-y-6"><div><div class="flex justify-between items-center mb-2"><span class="font-bold text-slate-600 text-sm">배경음악 볼륨</span><span id="bgm-vol-value" class="miku-text font-black text-sm">30%</span></div><input type="range" id="bgm-volume-slider" min="0" max="100" value="30" class="w-full cursor-pointer h-2 bg-slate-200 rounded-lg appearance-none"></div><div class="p-4 bg-slate-100 rounded-xl text-center"><p class="text-xs text-slate-500 font-bold mb-2">현재 로그인 ID</p><p class="text-xl font-black miku-text" id="setting-username">-</p></div><div class="border-t pt-4"><h4 class="text-sm font-black text-slate-600 mb-4 uppercase">앱 사용 가이드</h4><details class="mb-2 bg-slate-50 p-3 rounded-xl"><summary class="font-bold text-xs text-slate-700 flex justify-between items-center"><span>🏠 홈 (Home)</span> <i class="fas fa-chevron-down text-[10px]"></i></summary><p class="text-[11px] text-slate-500 mt-2 leading-relaxed">- 오늘의 공부량과 평균 속도 확인<br>- D-Day 카운트 및 오늘의 명언</p></details><details class="mb-2 bg-slate-50 p-3 rounded-xl"><summary class="font-bold text-xs text-slate-700 flex justify-between items-center"><span>⚡ 열공 (Study)</span> <i class="fas fa-chevron-down text-[10px]"></i></summary><div class="text-[11px] text-slate-500 mt-2 leading-relaxed space-y-1"><p>- <strong>과목 선택:</strong> 과목별 도구함 자동 변경</p><p>- <strong>Pace (속도):</strong> 1분당 푸는 문제 수.<br>&nbsp;&nbsp;(숫자가 높을수록 빨리 푸는 것)</p><p>- <strong>[시작]</strong> 버튼을 눌러야 기록 시작</p></div></details><details class="mb-2 bg-slate-50 p-3 rounded-xl"><summary class="font-bold text-xs text-slate-700 flex justify-between items-center"><span>📊 기록 (History)</span> <i class="fas fa-chevron-down text-[10px]"></i></summary><p class="text-[11px] text-slate-500 mt-2 leading-relaxed">- 날짜별 공부 시간/문제 수 저장<br>- 쓰레기통(🗑️) 아이콘으로 개별 삭제 가능</p></details></div></div></div></div>
-</main>
-<aside class="fixed bottom-0 left-0 w-full h-16 bg-white/90 backdrop-blur-xl border-t border-slate-200 z-50 lg:relative lg:w-64 lg:h-auto lg:border-t-0 lg:border-r lg:bg-white/60">
-<nav class="h-full flex lg:flex-col justify-around lg:justify-start lg:p-6 lg:space-y-4"><button onclick="showTab('home')" class="nav-btn flex-1 lg:flex-none flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-4 p-1 lg:p-4 rounded-2xl transition-all miku-text" id="nav-home"><i class="fas fa-home text-lg lg:text-xl mb-1 lg:mb-0"></i><span class="text-[10px] lg:text-base font-bold">홈</span></button><button onclick="showTab('study')" class="nav-btn flex-1 lg:flex-none flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-4 p-1 lg:p-4 rounded-2xl transition-all text-slate-400" id="nav-study"><i class="fas fa-bolt text-lg lg:text-xl mb-1 lg:mb-0"></i><span class="text-[10px] lg:text-base font-bold">열공</span></button><button onclick="showTab('history')" class="nav-btn flex-1 lg:flex-none flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-4 p-1 lg:p-4 rounded-2xl transition-all text-slate-400" id="nav-history"><i class="fas fa-chart-bar text-lg lg:text-xl mb-1 lg:mb-0"></i><span class="text-[10px] lg:text-base font-bold">기록</span></button><button onclick="showTab('settings')" class="nav-btn flex-1 lg:flex-none flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-4 p-1 lg:p-4 rounded-2xl transition-all text-slate-400" id="nav-settings"><i class="fas fa-cog text-lg lg:text-xl mb-1 lg:mb-0"></i><span class="text-[10px] lg:text-base font-bold">설정</span></button></nav>
-</aside>
-</div>
-<script>
-let player,studyLogData=[],currentUser="",storageKey="",stats={time:0,clapProblems:0,manualProblems:0,startTimeStr:""},currentSubject="국어",isStudying=!1,timerInterval=null,sensitivity=150,lastDetectionTime=0,wakeLock=null,audioContext=null,analyser=null,dataArray=null,currentDayStr="";const quotes=["가장 늦었다고 생각할 때가 가장 빠른 때다.","고통은 잠깐이지만 포기는 평생이다.","오늘 걷지 않으면 내일은 뛰어야 한다.","너의 미래는 지금 네가 무엇을 하고 있는지에 달려 있다.","꿈을 꾸기에 늦은 나이는 없다.","노력은 배신하지 않는다.","천재는 1%의 영감과 99%의 땀으로 만들어진다.","시작이 반이다."];
-function toggleAuthMode(){const e=document.getElementById("login-view"),t=document.getElementById("register-view");e.classList.contains("hidden")?(e.classList.remove("hidden"),t.classList.add("hidden")):(e.classList.add("hidden"),t.classList.remove("hidden"),document.getElementById("reg-id").value="",document.getElementById("reg-pw").value="")}function registerUser(){const e=document.getElementById("reg-id").value.trim(),t=document.getElementById("reg-pw").value.trim();if(!e)return alert("\uC544\uC774\uB514\uB97C \uC785\uB825\uD574\uC918!");if(!/^(?=.*[a-zA-Z])(?=.*[\W_]).{5,}$/.test(t))return alert("\uBE44\uBC00\uBC88\uD638\uB294 5\uC790\uB9AC \uC774\uC0C1\uC774\uC5B4\uC57C \uD558\uACE0,\n\uC601\uBB38\uACFC \uD2B9\uC218\uAE30\uD638\uB97C \uD558\uB098\uC529\uC740 \uAF2D \uD3EC\uD568\uD574\uC57C \uD574!");let n=JSON.parse(localStorage.getItem("daehan_study_users")||"{}");if(n[e])return alert("\uC774 \uC544\uC774\uB514\uB294 \uC774\uBBF8 \uC788\uB294 \uC544\uC774\uB514\uC785\uB2C8\uB2E4.\n\uB2E4\uB978 \uC544\uC774\uB514\uB97C \uC368\uBCFC\uB798?");n[e]=t,localStorage.setItem("daehan_study_users",JSON.stringify(n)),alert(`\uD658\uC601\uD574, ${e}! \n\uC774\uC81C \uB85C\uADF8\uC778 \uD654\uBA74\uC5D0\uC11C \uC785\uC7A5\uD574\uC918!`),toggleAuthMode()}
-function checkLogin(){const e=document.getElementById("login-id").value.trim(),t=document.getElementById("login-pw").value.trim();if(!e)return alert("\uC544\uC774\uB514\uB97C \uC785\uB825\uD574\uC918!");let n=JSON.parse(localStorage.getItem("daehan_study_users")||"{}");if(n[e]&&n[e]===t){currentUser=e,storageKey=`studyHistory_${e}`;const a=localStorage.getItem(storageKey);try{studyLogData=a?JSON.parse(a):[],Array.isArray(studyLogData)||(studyLogData=[])}catch(e){studyLogData=[]}document.getElementById("user-greeting").innerText=`${currentUser}\uB2D8`,document.getElementById("setting-username").innerText=currentUser,document.getElementById("home-welcome-msg").innerText=`${currentUser}, \uD654\uC774\uD305!`,document.getElementById("lock-screen").style.transform="translateY(-100%)",setTimeout(()=>{document.getElementById("lock-screen").classList.add("hidden"),document.getElementById("main-app").classList.remove("hidden"),document.getElementById("main-app").classList.add("flex")},500),player&&player.playVideo&&player.playVideo(),setTimeout(()=>player.unMute(),500),initBackground(),updateTopBar(),renderHistory(),checkTempSession(),changeSubject(),document.body.addEventListener("touchstart",()=>{audioContext&&"suspended"===audioContext.state&&audioContext.resume()},{once:!0})}else alert("\uC544\uC774\uB514\uAC00 \uC5C6\uAC70\uB098 \uBE44\uBC00\uBC88\uD638\uAC00 \uD2C0\uB838\uC5B4!\n\uB2E4\uC2DC \uD655\uC778\uD574\uBCFC\uB798?")}
-function showDailyQuote(){const e=(new Date).getDate()%quotes.length,t=document.getElementById("quote-text");document.getElementById("quote-area").classList.remove("hidden"),t.innerText=quotes[e]}function onYouTubeIframeAPIReady(){player=new YT.Player("yt-player",{height:"100%",width:"100%",videoId:"5qap5aO4i9A",playerVars:{autoplay:1,controls:0,loop:1,playlist:"5qap5aO4i9A",mute:1},events:{onReady:onPlayerReady}})}function onPlayerReady(e){e.target.setVolume(30)}document.getElementById("bgm-volume-slider").addEventListener("input",function(e){const t=e.target.value;document.getElementById("bgm-vol-value").innerText=t+"%",player&&player.setVolume&&player.setVolume(t)});
-function showTab(e){document.querySelectorAll(".tab-content").forEach(e=>e.classList.add("hidden")),document.getElementById("tab-"+e).classList.remove("hidden"),document.querySelectorAll(".nav-btn").forEach(e=>{e.classList.remove("miku-text","text-teal-600"),e.classList.add("text-slate-400")});const t=document.getElementById("nav-"+e);t.classList.remove("text-slate-400"),t.classList.add("miku-text")}
-function updateTopBar(){const e=new Date,t=["SUN","MON","TUE","WED","THU","FRI","SAT"];document.getElementById("top-date").innerText=`${e.getFullYear()}.${String(e.getMonth()+1).padStart(2,"0")}.${String(e.getDate()).padStart(2,"0")} ${t[e.getDay()]}`,document.getElementById("top-time").innerText=e.toLocaleTimeString("en-US",{hour12:!1,hour:"2-digit",minute:"2-digit"});const n=Math.ceil((new Date("2025-11-13T00:00:00")-e)/864e5),a=document.getElementById("dday-tag");a.innerText=n>0?`D-${n} \uC218\uB2A5 \uB300\uBC15 \uAE30\uC6D0`:0===n?"D-DAY \uD654\uC774\uD305!":"\uC218\uACE0\uD588\uC5B4, \uB108\uC758 \uAFC8\uC744 \uC751\uC6D0\uD574!"}
-function changeSubject(){const e={국어:{tool:"https://ko.dict.naver.com/",desc:"\uAD6D\uC5B4\uC0AC\uC804\uC5D0\uC11C \uB2E8\uC5B4\uB97C \uCC3E\uC544\uBCF4\uC138\uC694.",icon:"📚"},수학:{tool:"https://www.geogebra.org/calculator",desc:"\uADF8\uB798\uD504 \uACC4\uC0B0\uAE30\uB97C \uD65C\uC6A9\uD558\uC138\uC694.",icon:"📐"},영어:{tool:"https://en.dict.naver.com/",desc:"\uC601\uC5B4\uC0AC\uC804\uC5D0\uC11C \uB2E8\uC5B4\uB97C \uCC3E\uC544\uBCF4\uC138\uC694.",icon:"🔤"},과학:{tool:"https://phet.colorado.edu/ko/",desc:"\uAC00\uC0C1 \uC2E4\uD5D8\uC2E4\uC744 \uC774\uC6A9\uD574\uBCF4\uC138\uC694.",icon:"🔬"},사회:{tool:"https://map.naver.com/",desc:"\uC9C0\uB3C4\uB85C \uC704\uCE58\uB97C \uD655\uC778\uD574\uBCF4\uC138\uC694.",icon:"🌍"},역사:{tool:"https://encykorea.aks.ac.kr/",desc:"\uBBFC\uC871\uBB38\uD654\uB300\uBC31\uACFC\uC0AC\uC804\uC744 \uCC38\uACE0\uD558\uC138\uC694.",icon:"⏳"}};currentSubject=document.getElementById("subject-select").value;const t=e[currentSubject];document.getElementById("tool-desc").innerText=t.desc,document.getElementById("tool-input").placeholder=`${t.icon} ${currentSubject} \uAD00\uB828 \uAC80\uC0C9`}
-function useTool(){const e=document.getElementById("tool-input").value,t=document.getElementById("tool-iframe");document.getElementById("iframe-container").classList.remove("hidden"),t.src=e?"수학"===currentSubject?"https://www.geogebra.org/calculator":"과학"===currentSubject?`https://www.google.com/search?igu=1&q=${e}`:`https://search.naver.com/search.naver?query=${e}`:{"국어":"https://ko.dict.naver.com/","수학":"https://www.geogebra.org/calculator","영어":"https://en.dict.naver.com/","과학":"https://phet.colorado.edu/ko/","사회":"https://map.naver.com/","역사":"https://encykorea.aks.ac.kr/"}[currentSubject]}function closeIframe(){document.getElementById("iframe-container").classList.add("hidden")}document.getElementById("sens-slider").addEventListener("input",function(e){sensitivity=201-e.target.value,document.getElementById("sens-value").innerText=e.target.value});
-function startStudy(){currentUser?(isStudying||(isStudying=!0,stats={time:0,clapProblems:0,manualProblems:0,startTimeStr:(new Date).toLocaleTimeString()},document.getElementById("start-btn").disabled=!0,document.getElementById("start-btn").classList.add("opacity-40"),document.getElementById("end-btn").disabled=!1,document.getElementById("end-btn").classList.remove("opacity-40"),document.getElementById("subject-select").disabled=!0,"wakeLock"in navigator&&navigator.wakeLock.request("screen").then(e=>{wakeLock=e}),navigator.mediaDevices.getUserMedia({audio:!0}).then(e=>{audioContext=new(window.AudioContext||window.webkitAudioContext),analyser=audioContext.createAnalyser();const t=audioContext.createMediaStreamSource(e);t.connect(analyser),analyser.fftSize=256,dataArray=new Uint8Array(analyser.frequencyBinCount),detectSound()}).catch(e=>{console.log("\uB9C8\uC774\uD06C \uAD8C\uD55C \uC5C6\uC74C"),alert("\uB9C8\uC774\uD06C\uB97C \uCF1C\uC57C \uBC15\uC218 \uC18C\uB9AC\uB97C \uB4E4\uC744 \uC218 \uC788\uC5B4! 🎤")}),timerInterval=setInterval(()=>{stats.time++,updateTimerDisplay()},1e3))):alert("\uB85C\uADF8\uC778\uC774 \uD544\uC694\uD574!")}
-function detectSound(){if(!isStudying)return;requestAnimationFrame(detectSound),analyser.getByteFrequencyData(dataArray);let e=0;for(let t=0;t<dataArray.length;t++)e+=dataArray[t];let t=e/dataArray.length;const n=Math.min(100,t/50*100);document.getElementById("audio-bar").style.width=n+"%";const a=Date.now();t>sensitivity/3&&a-lastDetectionTime>800&&(addCount("clap",1),lastDetectionTime=a,(e=document.createElement("div")).className="fixed inset-0 bg-teal-200/30 z-[200] pointer-events-none flash-effect",document.body.appendChild(e),setTimeout(()=>e.remove(),200));var e}function addCount(e,t){!isStudying&&t>0?alert("\uBA3C\uC800 [\uC2DC\uC791] \uBC84\uD2BC\uC744 \uB20C\uB7EC\uC918!"):("clap"===e?stats.clapProblems+=t:stats.manualProblems+=t,updateDisplay())}function minusAnyCount(){stats.manualProblems>0?stats.manualProblems--:stats.clapProblems>0&&stats.clapProblems--,updateDisplay()}
-function updateDisplay(){const e=stats.clapProblems+stats.manualProblems;document.getElementById("total-count-display").innerText=e,document.getElementById("clap-count").innerText=stats.clapProblems,document.getElementById("manual-count").innerText=stats.manualProblems;const t=stats.time/60,n=t>0?(e/t).toFixed(1):"0.0";document.getElementById("live-pace").innerText=n}function updateTimerDisplay(){const e=Math.floor(stats.time/60),t=stats.time%60;document.getElementById("timer").innerText=`${String(e).padStart(2,"0")}:${String(t).padStart(2,"0")}`}
-function endStudyAndSave(e){isStudying=!1,clearInterval(timerInterval),wakeLock&&wakeLock.release(),audioContext&&audioContext.close(),document.getElementById("start-btn").disabled=!1,document.getElementById("start-btn").classList.remove("opacity-40"),document.getElementById("end-btn").disabled=!0,document.getElementById("end-btn").classList.add("opacity-40"),document.getElementById("subject-select").disabled=!1;if(e&&(stats.clapProblems+stats.manualProblems>0||stats.time>0)){const t=stats.clapProblems+stats.manualProblems,n=new Date,a={date:`${n.getMonth()+1}/${n.getDate()}`,subject:currentSubject,time:stats.time,count:t,pace:stats.time>0?(t/(stats.time/60)).toFixed(1):0};JSON.parse(localStorage.getItem("temp_study_session"))&&localStorage.removeItem("temp_study_session"),studyLogData.unshift(a),studyLogData.length>50&&studyLogData.pop(),localStorage.setItem(storageKey,JSON.stringify(studyLogData)),renderHistory(),alert(`\uC218\uACE0\uD588\uC5B4! ${t}\uBB38\uC81C \uD480\uC5C8\uACE0, ${Math.floor(stats.time/60)}\uBD84 \uC9D1\uC911\uD588\uB124! 👍`)}stats={time:0,clapProblems:0,manualProblems:0,startTimeStr:""},updateDisplay(),updateTimerDisplay()}
-setInterval(()=>{if(isStudying){localStorage.setItem("temp_study_session",JSON.stringify({stats:stats,subject:currentSubject,user:currentUser,timestamp:Date.now()}))}},1e4);function checkTempSession(){const e=JSON.parse(localStorage.getItem("temp_study_session"));e&&e.user===currentUser&&Date.now()-e.timestamp<3e5&&(confirm("\uBC29\uAE08 \uACF5\uBD80\uD558\uB358 \uAE30\uB85D\uC774 \uB0A8\uC544\uC788\uC5B4! \uC774\uC5B4\uD560\uB798?")?(stats=e.stats,currentSubject=e.subject,document.getElementById("subject-select").value=currentSubject,changeSubject(),startStudy()):localStorage.removeItem("temp_study_session"))}
-function renderHistory(){const e=document.getElementById("history-list");e.innerHTML="";let t=0,n=0;studyLogData.forEach((a,l)=>{t+=a.count,n+=a.time;const s=Math.floor(a.time/60),o=document.createElement("div");o.className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex justify-between items-center",o.innerHTML=`<div class="flex items-center gap-3"><div class="bg-teal-100 text-teal-600 font-black text-xs px-2 py-1 rounded-lg">${a.date}</div><div><div class="text-sm font-bold text-slate-700">${a.subject} <span class="text-slate-400 text-xs">| ${s}\uBD84</span></div><div class="text-xs text-slate-400">\uC18D\uB3C4: ${a.pace}/\uBD84</div></div></div><div class="flex items-center gap-3"><span class="text-xl font-black miku-text">${a.count}\uBB38\uC81C</span><button onclick="deleteLog(${l})" class="text-slate-300 hover:text-rose-500"><i class="fas fa-trash"></i></button></div>`,e.appendChild(o)}),document.getElementById("home-total-problems").innerText=t,document.getElementById("home-avg-pace").innerText=n>0?(t/(n/60)).toFixed(1):"0.0"}function deleteLog(e){confirm("\uC815\uB9D0 \uC774 \uAE30\uB85D\uC744 \uC9C0\uC6B8 \uAC70\uC57C?")&&(studyLogData.splice(e,1),localStorage.setItem(storageKey,JSON.stringify(studyLogData)),renderHistory())}function clearAllData(){confirm("\uBAA8\uB4E0 \uAE30\uB85D\uC744 \uCD08\uAE30\uD654\uD560\uAE4C? (\uB418\uB3CC\uB9B4 \uC218 \uC5C6\uC5B4!)")&&(studyLogData=[],localStorage.setItem(storageKey,JSON.stringify(studyLogData)),renderHistory())}
-function logout(){confirm("\uB85C\uADF8\uC544\uC6C3 \uD560 \uAC70\uC57C?")&&(isStudying&&endStudyAndSave(!1),currentUser="",document.getElementById("main-app").classList.remove("flex"),document.getElementById("main-app").classList.add("hidden"),document.getElementById("lock-screen").classList.remove("hidden"),document.getElementById("lock-screen").style.transform="translateY(0)",document.getElementById("login-pw").value="",player&&player.stopVideo&&player.stopVideo())}
-function initBackground(){const e=document.getElementById("bg-layer");e.innerHTML="";const t=(new Date).getMonth()+1;let n="❄️",a="fall-sway",l=15,s=[15,30];t>=3&&t<=5?(n="🌸",a="fall-rotate"):t>=6&&t<=8?(n="💧",a="fall-straight",l=20,s=[10,20]):t>=9&&t<=11&&(n="🍁",a="fall-rotate");for(let t=0;t<l;t++){const t=document.createElement("div");t.className="particle",t.innerText=n,t.style.left=100*Math.random()+"vw",t.style.fontSize=Math.random()*(s[1]-s[0])+s[0]+"px";const l=5*Math.random()+5;t.style.animation=`${a} ${l}s linear infinite`,t.style.animationDelay=5*Math.random()+"s",e.appendChild(t)}}
-window.addEventListener("keydown",e=>{if("Space"===e.code&&isStudying){e.preventDefault();addCount("manual",1)}});setInterval(updateTopBar,1e3);updateTopBar();
-document.addEventListener("keydown",function(e){if("F12"===e.key||123===e.keyCode)return e.preventDefault(),e.returnValue=!1,alert("\uC557! \uAC1C\uBC1C\uC790 \uB3C4\uAD6C\uB294 \uC5F4 \uC218 \uC5C6\uC5B4! \u266B"),!1;if(e.ctrlKey&&(e.shiftKey&&["I","J","C"].includes(e.key.toUpperCase())||"U"===e.key.toUpperCase()))return e.preventDefault(),e.returnValue=!1,alert("\uC18C\uC2A4 \uCF54\uB4DC\uB294 \uBE44\uBC00\uC774\uC57C! \uC5D0\uD5E4\uD5E4 \u2728"),!1});document.addEventListener("contextmenu",function(e){e.preventDefault()});
-</script>
+    <noscript>
+        <div style="position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:99999; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center;">
+            <h1 style="color:#39c5bb; font-family:'Noto Sans KR', sans-serif; font-size:30px; margin-bottom:20px;">앗! 자바스크립트가 꺼져있어! 🎵</h1>
+            <p style="color:#555; font-size:18px;">미쿠와 공부하려면 브라우저 설정에서<br>자바스크립트를 꼭 켜줘! (｡♥‿♥｡)</p>
+            <p style="color:#aaa; font-size:12px; margin-top:30px;">Chrome 설정 > 사이트 설정 > 자바스크립트 > 허용</p>
+        </div>
+    </noscript>
+    <div id="bg-layer"></div>
+
+    <header class="fixed top-0 left-0 w-full h-12 lg:h-14 flex items-center justify-between px-5 lg:px-8 z-[100] bg-white/80 backdrop-blur-md border-b border-white/50 shadow-sm">
+        <div id="top-date" class="font-black text-slate-500 text-xs uppercase tracking-wider"></div>
+        <div class="absolute left-1/2 -translate-x-1/2 text-center">
+            <div id="user-greeting" class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">GUEST</div>
+            <div id="top-time" class="miku-text text-xl lg:text-2xl font-black tracking-widest leading-none"></div>
+        </div>
+        <div class="flex gap-2 text-xs font-bold text-slate-400">
+            <button onclick="logout()" class="hover:text-rose-500 transition-colors" title="로그아웃"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </header>
+
+    <div id="lock-screen" class="fixed inset-0 miku-bg flex items-center justify-center z-[110] px-4 transition-transform duration-500">
+        <div class="bg-white/95 backdrop-blur-xl p-8 lg:p-12 rounded-[30px] shadow-2xl w-full max-w-sm text-center relative">
+            
+            <div id="login-view">
+                <div class="absolute top-4 right-6 text-[10px] font-black text-slate-300">제작자: 장대한</div>
+                <button onclick="toggleAuthMode()" class="absolute top-4 left-6 text-xs font-bold text-teal-600 hover:text-teal-800 bg-teal-50 px-3 py-1 rounded-full">
+                    <i class="fas fa-user-plus"></i> 회원가입
+                </button>
+                
+                <h1 class="text-2xl font-black text-slate-800 mb-2 tracking-tighter uppercase mt-6">DAEHAN STUDY</h1>
+                <p class="text-rose-500 font-black text-sm mb-6 animate-pulse">친구들아 열공하자! 🔥</p>
+                
+                <div class="text-left mb-1 ml-1"><span class="text-[10px] font-black text-slate-500 uppercase">ID</span></div>
+                <input type="text" id="login-id" class="w-full p-4 bg-slate-100 rounded-2xl mb-4 text-center font-bold outline-none border-2 border-transparent focus:border-teal-400 placeholder-slate-300" placeholder="아이디">
+                
+                <div class="text-left mb-1 ml-1"><span class="text-[10px] font-black text-slate-500 uppercase">Password</span></div>
+                <input type="password" id="login-pw" class="w-full p-4 bg-slate-100 rounded-2xl mb-6 text-center font-bold outline-none border-2 border-transparent focus:border-teal-400 placeholder-slate-300" placeholder="비밀번호">
+                
+                <button onclick="checkLogin()" class="w-full miku-bg text-white py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-transform">로그인 & 입장 🚀</button>
+            </div>
+
+            <div id="register-view" class="hidden">
+                <button onclick="toggleAuthMode()" class="absolute top-4 left-4 text-xs font-bold text-slate-400 hover:text-slate-600">
+                    <i class="fas fa-arrow-left"></i> 뒤로가기
+                </button>
+                
+                <h2 class="text-xl font-black text-slate-800 mb-6 tracking-tighter uppercase mt-4">NEW ACCOUNT</h2>
+                
+                <div class="text-left mb-1 ml-1"><span class="text-[10px] font-black text-slate-500 uppercase">New ID</span></div>
+                <input type="text" id="reg-id" class="w-full p-3 bg-slate-100 rounded-2xl mb-3 text-center font-bold outline-none border-2 border-transparent focus:border-teal-400 placeholder-slate-300" placeholder="사용할 아이디">
+                
+                <div class="text-left mb-1 ml-1"><span class="text-[10px] font-black text-slate-500 uppercase">New Password</span></div>
+                <input type="password" id="reg-pw" class="w-full p-3 bg-slate-100 rounded-2xl mb-2 text-center font-bold outline-none border-2 border-transparent focus:border-teal-400 placeholder-slate-300" placeholder="비밀번호 설정">
+                
+                <p class="text-[10px] text-rose-500 font-bold mb-6 text-left ml-2">
+                    * 5자리 이상<br>
+                    * 영문 + 특수문자(!@#$ 등) 필수
+                </p>
+                
+                <button onclick="registerUser()" class="w-full bg-indigo-500 text-white py-4 rounded-2xl font-black shadow-lg active:scale-95 transition-transform">계정 만들기 ✨</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="main-app" class="hidden h-screen flex flex-col lg:flex-row pt-12 lg:pt-14 overflow-hidden relative">
+        <main id="main-content" class="flex-1 p-4 lg:p-8 overflow-y-auto z-10 pb-24 lg:pb-8 scroll-smooth">
+            <div id="tab-home" class="tab-content max-w-4xl mx-auto space-y-6">
+                <div class="glass-card p-6 lg:p-10 rounded-[30px] text-center shadow-lg relative overflow-hidden">
+                    <div id="dday-tag" class="inline-block px-4 py-1.5 rounded-full miku-bg text-white text-[11px] font-black mb-4 uppercase shadow-md tracking-wider"></div>
+                    <h2 class="text-2xl lg:text-4xl font-black text-slate-800 mb-2" id="home-welcome-msg">오늘도 파이팅!</h2>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-white/60 p-4 rounded-2xl border border-white">
+                            <p class="text-[10px] font-black text-slate-400 mb-1 uppercase">Today Problems</p>
+                            <p class="text-4xl lg:text-5xl font-black miku-text" id="home-total-problems">0</p>
+                        </div>
+                        <div class="bg-white/60 p-4 rounded-2xl border border-white">
+                            <p class="text-[10px] font-black text-slate-400 mb-1 uppercase">Avg Pace</p>
+                            <p class="text-4xl lg:text-5xl font-black text-orange-400" id="home-avg-pace">0.0</p>
+                        </div>
+                    </div>
+                    <div class="mb-8">
+                        <button onclick="showDailyQuote()" class="bg-slate-100 text-slate-600 px-6 py-3 rounded-xl font-bold text-xs hover:bg-teal-50 hover:text-teal-600 transition-all shadow-sm border border-slate-200">
+                            📜 오늘의 명언은?
+                        </button>
+                        <div id="quote-area" class="hidden mt-4 p-4 bg-teal-50 rounded-2xl border border-teal-100 animate-fadeIn">
+                            <p id="quote-text" class="text-sm lg:text-base font-black text-slate-700 leading-relaxed"></p>
+                        </div>
+                    </div>
+                    <div class="aspect-video bg-black rounded-[20px] overflow-hidden shadow-2xl relative group">
+                        <div id="yt-player" class="absolute inset-0 w-full h-full"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-study" class="tab-content hidden max-w-md mx-auto relative">
+                <div id="study-container" class="glass-card p-6 lg:p-10 rounded-[40px] shadow-2xl text-center border-2 border-white/50">
+                    
+                    <div class="mb-4">
+                        <label class="block text-left text-[10px] font-black text-slate-400 uppercase mb-1 ml-2">SUBJECT</label>
+                        <select id="subject-select" onchange="changeSubject()" class="w-full p-3 rounded-2xl font-bold text-slate-700 bg-white border-2 border-slate-100 focus:border-teal-400 outline-none text-lg">
+                            <option value="국어">📚 국어</option>
+                            <option value="수학">📐 수학</option>
+                            <option value="영어">🔤 영어</option>
+                            <option value="과학">🔬 과학</option>
+                            <option value="사회">🌍 사회</option>
+                            <option value="역사">⏳ 역사</option>
+                        </select>
+                    </div>
+
+                    <div id="tool-box" class="mb-6 bg-slate-50 p-3 rounded-2xl border border-dashed border-slate-300">
+                        <div class="flex gap-2">
+                            <input type="text" id="tool-input" class="flex-1 p-2 rounded-xl border border-slate-200 text-sm focus:border-teal-400 outline-none" placeholder="단어/공식 검색">
+                            <button onclick="useTool()" class="bg-teal-500 text-white px-4 rounded-xl font-bold text-sm shadow-md hover:bg-teal-600"><i class="fas fa-search"></i></button>
+                        </div>
+                        <p id="tool-desc" class="text-[10px] text-slate-400 mt-1 text-left ml-1">국어사전에서 단어를 찾아보세요.</p>
+                    </div>
+                    
+                    <div id="iframe-container" class="hidden mt-4 rounded-2xl overflow-hidden border-2 border-teal-200 shadow-inner bg-white" style="height: 400px;">
+                        <div class="bg-teal-100 p-2 flex justify-between items-center text-[10px] font-bold">
+                            <span class="miku-text">MIKU SEARCH VIEW</span>
+                            <button onclick="closeIframe()" class="text-rose-500 hover:text-rose-700"><i class="fas fa-times"></i> 닫기</button>
+                        </div>
+                        <iframe id="tool-iframe" src="" class="w-full h-full border-none"></iframe>
+                    </div>
+
+                    <div class="mb-8 relative">
+                        <div class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-2">Total Solved</div>
+                        <div id="total-count-display" class="miku-text text-8xl lg:text-9xl font-black tracking-tighter leading-none">0</div>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-8 bg-white/60 px-6 py-4 rounded-3xl border border-white">
+                        <div class="text-left"><p class="text-[10px] font-black text-slate-400 uppercase mb-1">Time</p><div id="timer" class="text-3xl font-black text-slate-700 font-mono">00:00</div></div>
+                        <div class="h-8 w-px bg-slate-300"></div>
+                        <div class="text-right"><p class="text-[10px] font-black text-slate-400 uppercase mb-1">Pace</p><p id="live-pace" class="text-3xl font-black miku-text animate-pulse">0.0</p></div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3 mb-6">
+                        <div class="bg-teal-50 p-3 rounded-2xl border border-teal-100 flex flex-col items-center justify-center">
+                            <span class="text-[10px] font-black text-teal-600 uppercase">Sound 🎤</span><span id="clap-count" class="text-2xl font-black text-teal-700">0</span>
+                        </div>
+                        <div class="bg-indigo-50 p-3 rounded-2xl border border-indigo-100 flex flex-col items-center justify-center">
+                            <span class="text-[10px] font-black text-indigo-600 uppercase">Click 🖱️</span><span id="manual-count" class="text-2xl font-black text-indigo-700">0</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 mb-6">
+                        <button onclick="minusAnyCount()" class="w-1/4 py-4 rounded-2xl font-black text-xl bg-slate-200 text-slate-600 shadow-md active:scale-95 transition-all hover:bg-slate-300" title="1개 취소"><i class="fas fa-minus"></i></button>
+                        <button onclick="addCount('manual', 1)" class="w-3/4 py-4 rounded-2xl font-black text-xl bg-indigo-500 text-white shadow-lg active:scale-95 transition-all hover:bg-indigo-600"><i class="fas fa-plus mr-2"></i> 직접 풀었음</button>
+                    </div>
+                    
+                    <div class="bg-slate-100/50 p-4 rounded-3xl mb-6 border border-white">
+                        <div class="flex justify-between text-[10px] font-black text-slate-400 mb-2 uppercase">
+                            <span>Mic Sensitivity</span><span id="sens-value" class="text-teal-600">150</span>
+                        </div>
+                        <input type="range" id="sens-slider" min="1" max="200" value="150" class="w-full mb-3 cursor-pointer h-2 bg-slate-200 rounded-lg appearance-none">
+                        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden shadow-inner">
+                            <div id="audio-bar" class="h-full miku-bg transition-all duration-75 ease-out" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button id="start-btn" onclick="startStudy()" class="flex-1 py-4 rounded-2xl font-black text-lg bg-teal-500 text-white shadow-lg active:scale-95 transition-all">시작</button>
+                        <button id="end-btn" onclick="endStudyAndSave(true)" class="flex-1 py-4 rounded-2xl font-black text-lg bg-rose-500 text-white shadow-lg opacity-40 active:scale-95 transition-all" disabled>종료</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-history" class="tab-content hidden max-w-3xl mx-auto">
+                <div class="glass-card p-6 rounded-[30px] mb-6 flex justify-between items-center sticky top-0 z-20">
+                    <h3 class="text-xl font-black text-slate-800 uppercase tracking-tighter">History</h3>
+                    <button onclick="clearAllData()" class="text-xs font-bold text-slate-400 border border-slate-200 px-3 py-2 rounded-full hover:bg-rose-50 hover:text-rose-500 hover:border-rose-200">전체 초기화</button>
+                </div>
+                <div id="history-list" class="space-y-4 pb-10"></div>
+            </div>
+
+            <div id="tab-settings" class="tab-content hidden max-w-md mx-auto">
+                <div class="glass-card p-8 rounded-[40px] shadow-lg space-y-8">
+                    <h3 class="text-2xl font-black text-slate-800 uppercase border-b pb-4">Settings</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-slate-600 text-sm">배경음악 볼륨</span><span id="bgm-vol-value" class="miku-text font-black text-sm">30%</span>
+                            </div>
+                            <input type="range" id="bgm-volume-slider" min="0" max="100" value="30" class="w-full cursor-pointer h-2 bg-slate-200 rounded-lg appearance-none">
+                        </div>
+                        <div class="p-4 bg-slate-100 rounded-xl text-center">
+                            <p class="text-xs text-slate-500 font-bold mb-2">현재 로그인 ID</p>
+                            <p class="text-xl font-black miku-text" id="setting-username">-</p>
+                        </div>
+                        <div class="border-t pt-4">
+                            <h4 class="text-sm font-black text-slate-600 mb-4 uppercase">앱 사용 가이드</h4>
+                            <details class="mb-2 bg-slate-50 p-3 rounded-xl"><summary class="font-bold text-xs text-slate-700 flex justify-between items-center"><span>🏠 홈 (Home)</span> <i class="fas fa-chevron-down text-[10px]"></i></summary><p class="text-[11px] text-slate-500 mt-2 leading-relaxed">- 오늘의 공부량과 평균 속도 확인<br>- D-Day 카운트 및 오늘의 명언</p></details>
+                            <details class="mb-2 bg-slate-50 p-3 rounded-xl">
+                                <summary class="font-bold text-xs text-slate-700 flex justify-between items-center"><span>⚡ 열공 (Study)</span> <i class="fas fa-chevron-down text-[10px]"></i></summary>
+                                <div class="text-[11px] text-slate-500 mt-2 leading-relaxed space-y-1">
+                                    <p>- <strong>과목 선택:</strong> 과목별 도구함 자동 변경</p>
+                                    <p>- <strong>Pace (속도):</strong> 1분당 푸는 문제 수.<br>&nbsp;&nbsp;(숫자가 높을수록 빨리 푸는 것)</p>
+                                    <p>- <strong>[시작]</strong> 버튼을 눌러야 기록 시작</p>
+                                </div>
+                            </details>
+                            <details class="mb-2 bg-slate-50 p-3 rounded-xl"><summary class="font-bold text-xs text-slate-700 flex justify-between items-center"><span>📊 기록 (History)</span> <i class="fas fa-chevron-down text-[10px]"></i></summary><p class="text-[11px] text-slate-500 mt-2 leading-relaxed">- 날짜별 공부 시간/문제 수 저장<br>- 쓰레기통(🗑️) 아이콘으로 개별 삭제 가능</p></details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="fixed bottom-0 left-0 w-full h-16 bg-white/90 backdrop-blur-xl border-t border-slate-200 z-50 lg:relative lg:w-64 lg:h-auto lg:border-t-0 lg:border-r lg:bg-white/60">
+            <nav class="h-full flex lg:flex-col justify-around lg:justify-start lg:p-6 lg:space-y-4">
+                <button onclick="showTab('home')" class="nav-btn flex-1 lg:flex-none flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-4 p-1 lg:p-4 rounded-2xl transition-all miku-text" id="nav-home"><i class="fas fa-home text-lg lg:text-xl mb-1 lg:mb-0"></i><span class="text-[10px] lg:text-base font-bold">홈</span></button>
+                <button onclick="showTab('study')" class="nav-btn flex-1 lg:flex-none flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-4 p-1 lg:p-4 rounded-2xl transition-all text-slate-400" id="nav-study"><i class="fas fa-bolt text-lg lg:text-xl mb-1 lg:mb-0"></i><span class="text-[10px] lg:text-base font-bold">열공</span></button>
+                <button onclick="showTab('history')" class="nav-btn flex-1 lg:flex-none flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-4 p-1 lg:p-4 rounded-2xl transition-all text-slate-400" id="nav-history"><i class="fas fa-chart-bar text-lg lg:text-xl mb-1 lg:mb-0"></i><span class="text-[10px] lg:text-base font-bold">기록</span></button>
+                <button onclick="showTab('settings')" class="nav-btn flex-1 lg:flex-none flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1 lg:gap-4 p-1 lg:p-4 rounded-2xl transition-all text-slate-400" id="nav-settings"><i class="fas fa-cog text-lg lg:text-xl mb-1 lg:mb-0"></i><span class="text-[10px] lg:text-base font-bold">설정</span></button>
+            </nav>
+        </aside>
+    </div>
+
+   <script>
+        // 🔥 1. Firebase 서버 연결 열쇠 (이게 꼭 있어야 해!)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDubCYnThrj_eYoWzBtw23SSLTvxJhMp_I",
+            authDomain: "daehan-study.firebaseapp.com",
+            projectId: "daehan-study",
+            storageBucket: "daehan-study.firebasestorage.app",
+            messagingSenderId: "1096091007680",
+            appId: "1:1096091007680:web:86686e317da5a105d28b25"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // 변수들은 그대로 유지
+        let player; let studyLogData = []; let currentUser = ""; let storageKey = "";
+        let stats = { time: 0, clapProblems: 0, manualProblems: 0, startTimeStr: "" }; let currentSubject = "국어";
+        let isStudying = false; let timerInterval = null; let sensitivity = 150; let lastDetectionTime = 0; let wakeLock = null;
+        let audioContext = null; let analyser = null; let dataArray = null; let currentDayStr = "";
+        
+        // -------------------------
+        // 1. 회원관리 및 로그인 시스템
+        // -------------------------
+        function toggleAuthMode() {
+            const loginView = document.getElementById('login-view');
+            const regView = document.getElementById('register-view');
+            if(loginView.classList.contains('hidden')) {
+                loginView.classList.remove('hidden'); regView.classList.add('hidden');
+            } else {
+                loginView.classList.add('hidden'); regView.classList.remove('hidden');
+                document.getElementById('reg-id').value = ""; document.getElementById('reg-pw').value = "";
+            }
+        }
+        
+        // 🔥 2. 서버용 회원가입 (찌꺼기 코드 제거됨!)
+        function registerUser() {
+            const id = document.getElementById('reg-id').value.trim();
+            const pw = document.getElementById('reg-pw').value.trim();
+            if(!id) return alert("아이디를 입력해줘!");
+            if(pw.length < 5) return alert("비번은 5자리 이상으로 해줘! 🔒");
+
+                .then(() => { alert("가입 성공! 이제 구글 서버에 저장됐어! 🚀"); toggleAuthMode(); })
+                .catch(e => alert("에러 발생: " + e.message));
+        }
+        
+        // 🔥 3. 서버용 로그인 (찌꺼기 코드 제거됨!)
+        function checkLogin() {
+            const id = document.getElementById('login-id').value.trim();
+            const pw = document.getElementById('login-pw').value.trim();
+            auth.signInWithEmailAndPassword(id + "@study.com", pw)
+                .then(() => {
+                    currentUser = id;
+                    document.getElementById('lock-screen').style.transform = "translateY(-100%)";
+                    setTimeout(() => {
+                        document.getElementById('lock-screen').classList.add('hidden');
+                        document.getElementById('main-app').classList.remove('hidden');
+                        document.getElementById('user-greeting').innerText = id + "님";
+                        
+                        // 로그인 성공하면 초기화 실행
+                        storageKey = `studyHistory_${id}`;
+                        document.getElementById('home-welcome-msg').innerText = `${id}, 화이팅!`;
+                        document.getElementById('setting-username').innerText = id;
+                        initBackground(); updateTopBar(); renderHistory();
+                        if(player && player.playVideo) { player.playVideo(); }
+                    }, 500);
+                })
+                .catch(() => alert("아이디나 비번이 틀렸어! 다시 확인해봐! ❌"));
+        }
+
+        // -------------------------
+        // 기존 기능들 (유지)
+        // -------------------------
+        const quotes = [
+            "가장 늦었다고 생각할 때가 가장 빠른 때다.",
+            "고통은 잠깐이지만 포기는 평생이다.",
+            "오늘 걷지 않으면 내일은 뛰어야 한다.",
+            "너의 미래는 지금 네가 무엇을 하고 있는지에 달려 있다.",
+            "꿈을 꾸기에 늦은 나이는 없다.",
+            "노력은 배신하지 않는다.",
+            "천재는 1%의 영감과 99%의 땀으로 만들어진다.",
+            "시작이 반이다.",
+            "열공해라(?)"
+        ];
+
+        function showDailyQuote() {
+            const todayIndex = new Date().getDate() % quotes.length;
+            const quoteText = document.getElementById('quote-text');
+            const quoteArea = document.getElementById('quote-area');
+            quoteText.innerText = quotes[todayIndex];
+            quoteArea.classList.remove('hidden');
+        }
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                height: '100%', width: '100%',
+                videoId: '5qap5aO4i9A', 
+                playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1, 'playlist': '5qap5aO4i9A', 'mute': 1 },
+                events: { 'onReady': onPlayerReady }
+            });
+        }
+        function onPlayerReady(event) { event.target.setVolume(30); }
+        document.getElementById('bgm-volume-slider').addEventListener('input', function(e) {
+            const vol = e.target.value;
+            document.getElementById('bgm-vol-value').innerText = vol + '%';
+            if(player && player.setVolume) player.setVolume(vol);
+        });
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('miku-text', 'text-teal-600');
+                btn.classList.add('text-slate-400');
+            });
+            const activeBtn = document.getElementById('nav-' + tabName);
+            activeBtn.classList.remove('text-slate-400');
+            activeBtn.classList.add('miku-text');
+        }
+
+        function updateTopBar() {
+            const now = new Date();
+            const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+            document.getElementById('top-date').innerText = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')} ${days[now.getDay()]}`;
+            document.getElementById('top-time').innerText = now.toLocaleTimeString('en-US', {hour12:false, hour:'2-digit', minute:'2-digit'});
+            
+            const targetDate = new Date('2025-11-13T00:00:00');
+            const diff = targetDate - now;
+            const dday = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            const ddayTag = document.getElementById('dday-tag');
+            if(diff > 0) ddayTag.innerText = `D-${dday} 수능 대박 기원`;
+            else if(dday === 0) ddayTag.innerText = "D-DAY 화이팅!";
+            else ddayTag.innerText = "수고했어, 너의 꿈을 응원해!";
+        }
+
+        function changeSubject() {
+            const subjects = {
+                '국어': { tool: 'https://ko.dict.naver.com/', desc: '국어사전에서 단어를 찾아보세요.', icon: '📚' },
+                '수학': { tool: 'https://www.geogebra.org/calculator', desc: '그래프 계산기를 활용하세요.', icon: '📐' },
+                '영어': { tool: 'https://en.dict.naver.com/', desc: '영어사전에서 단어를 찾아보세요.', icon: '🔤' },
+                '과학': { tool: 'https://phet.colorado.edu/ko/', desc: '가상 실험실을 이용해보세요.', icon: '🔬' },
+                '사회': { tool: 'https://map.naver.com/', desc: '지도로 위치를 확인해보세요.', icon: '🌍' },
+                '역사': { tool: 'https://encykorea.aks.ac.kr/', desc: '민족문화대백과사전을 참고하세요.', icon: '⏳' }
+            };
+            currentSubject = document.getElementById('subject-select').value;
+            const info = subjects[currentSubject];
+            document.getElementById('tool-desc').innerText = info.desc;
+            document.getElementById('tool-input').placeholder = `${info.icon} ${currentSubject} 관련 검색`;
+        }
+
+        function useTool() {
+            const query = document.getElementById('tool-input').value;
+            const iframe = document.getElementById('tool-iframe');
+            const container = document.getElementById('iframe-container');
+            
+            if(query) {
+                if(currentSubject === '수학') iframe.src = 'https://www.geogebra.org/calculator'; 
+                else if(currentSubject === '과학') iframe.src = `https://www.google.com/search?igu=1&q=${query}`;
+                else iframe.src = `https://search.naver.com/search.naver?query=${query}`;
+            } else {
+                const subjects = {
+                    '국어': 'https://ko.dict.naver.com/',
+                    '수학': 'https://www.geogebra.org/calculator',
+                    '영어': 'https://en.dict.naver.com/',
+                    '과학': 'https://phet.colorado.edu/ko/',
+                    '사회': 'https://map.naver.com/',
+                    '역사': 'https://encykorea.aks.ac.kr/'
+                };
+                iframe.src = subjects[currentSubject];
+            }
+            container.classList.remove('hidden');
+        }
+        function closeIframe() { document.getElementById('iframe-container').classList.add('hidden'); }
+
+        document.getElementById('sens-slider').addEventListener('input', function(e) {
+            sensitivity = 201 - e.target.value;
+            document.getElementById('sens-value').innerText = e.target.value;
+        });
+
+        function startStudy() {
+            if(!currentUser) { alert("로그인이 필요해!"); return; }
+            if(isStudying) return;
+            isStudying = true;
+            stats = { time: 0, clapProblems: 0, manualProblems: 0, startTimeStr: new Date().toLocaleTimeString() };
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('start-btn').classList.add('opacity-40');
+            document.getElementById('end-btn').disabled = false;
+            document.getElementById('end-btn').classList.remove('opacity-40');
+            document.getElementById('subject-select').disabled = true;
+            
+            // Wake Lock
+            if ('wakeLock' in navigator) { navigator.wakeLock.request('screen').then(lock => { wakeLock = lock; }); }
+
+            // Audio
+            navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                const source = audioContext.createMediaStreamSource(stream);
+                source.connect(analyser);
+                analyser.fftSize = 256;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+                detectSound();
+            }).catch(e => {
+                console.log("마이크 권한 없음");
+                alert("마이크를 켜야 박수 소리를 들을 수 있어! 🎤");
+            });
+
+            timerInterval = setInterval(() => {
+                stats.time++;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function detectSound() {
+            if(!isStudying) return;
+            requestAnimationFrame(detectSound);
+            analyser.getByteFrequencyData(dataArray);
+            
+            let sum = 0;
+            for(let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+            let average = sum / dataArray.length;
+            
+            const barWidth = Math.min(100, (average / 50) * 100);
+            document.getElementById('audio-bar').style.width = barWidth + '%';
+
+            const now = Date.now();
+            // 민감도: 슬라이더 값(1~200) -> sensitivity 변수는 (201 - 슬라이더) -> 1(민감)~200(둔감)
+            // average가 sensitivity보다 크면 소리 감지
+            if(average > (sensitivity / 3) && (now - lastDetectionTime > 800)) {
+                 addCount('clap', 1);
+                 lastDetectionTime = now;
+                 
+                 // 효과: 화면 반짝임
+                 const flash = document.createElement('div');
+                 flash.className = 'fixed inset-0 bg-teal-200/30 z-[200] pointer-events-none flash-effect';
+                 document.body.appendChild(flash);
+                 setTimeout(() => flash.remove(), 200);
+            }
+        }
+
+        function addCount(type, amount) {
+            if(!isStudying && amount > 0) return alert("먼저 [시작] 버튼을 눌러줘!");
+            if(type === 'clap') stats.clapProblems += amount;
+            else stats.manualProblems += amount;
+            updateDisplay();
+        }
+
+        function minusAnyCount() {
+            if(stats.manualProblems > 0) stats.manualProblems--;
+            else if(stats.clapProblems > 0) stats.clapProblems--;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const total = stats.clapProblems + stats.manualProblems;
+            document.getElementById('total-count-display').innerText = total;
+            document.getElementById('clap-count').innerText = stats.clapProblems;
+            document.getElementById('manual-count').innerText = stats.manualProblems;
+            
+            // Pace 계산 (문제 수 / 분)
+            const minutes = stats.time / 60;
+            const pace = minutes > 0 ? (total / minutes).toFixed(1) : "0.0";
+            document.getElementById('live-pace').innerText = pace;
+        }
+
+        function updateTimerDisplay() {
+            const min = Math.floor(stats.time / 60);
+            const sec = stats.time % 60;
+            document.getElementById('timer').innerText = `${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+        }
+
+        function endStudyAndSave(save) {
+            isStudying = false;
+            clearInterval(timerInterval);
+            if(wakeLock) wakeLock.release();
+            if(audioContext) audioContext.close();
+
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('start-btn').classList.remove('opacity-40');
+            document.getElementById('end-btn').disabled = true;
+            document.getElementById('end-btn').classList.add('opacity-40');
+            document.getElementById('subject-select').disabled = false;
+
+            if(save && (stats.clapProblems + stats.manualProblems > 0 || stats.time > 0)) {
+                const total = stats.clapProblems + stats.manualProblems;
+                const now = new Date();
+                const record = {
+                    date: `${now.getMonth()+1}/${now.getDate()}`,
+                    subject: currentSubject,
+                    time: stats.time,
+                    count: total,
+                    pace: (stats.time > 0 ? (total / (stats.time/60)).toFixed(1) : 0)
+                };
+                
+                // 임시저장 데이터 있으면 합치기 (새로고침 방지용)
+                const temp = JSON.parse(localStorage.getItem('temp_study_session'));
+                if(temp) {
+                     // 단순 합산 로직 (필요시 정교화 가능)
+                     localStorage.removeItem('temp_study_session');
+                }
+
+                studyLogData.unshift(record);
+                if(studyLogData.length > 50) studyLogData.pop();
+                localStorage.setItem(storageKey, JSON.stringify(studyLogData));
+                renderHistory();
+                alert(`수고했어! ${total}문제 풀었고, ${Math.floor(stats.time/60)}분 집중했네! 👍`);
+            }
+            // 초기화
+            stats = { time: 0, clapProblems: 0, manualProblems: 0, startTimeStr: "" };
+            updateDisplay(); updateTimerDisplay();
+        }
+
+        // 임시 저장 (새로고침 대비 - 10초마다)
+        setInterval(() => {
+            if(isStudying) {
+                localStorage.setItem('temp_study_session', JSON.stringify({
+                    stats: stats,
+                    subject: currentSubject,
+                    user: currentUser,
+                    timestamp: Date.now()
+                }));
+            }
+        }, 10000);
+
+        function checkTempSession() {
+            const temp = JSON.parse(localStorage.getItem('temp_study_session'));
+            if(temp && temp.user === currentUser && (Date.now() - temp.timestamp < 5 * 60 * 1000)) {
+                if(confirm("방금 공부하던 기록이 남아있어! 이어할래?")) {
+                    stats = temp.stats;
+                    currentSubject = temp.subject;
+                    document.getElementById('subject-select').value = currentSubject;
+                    changeSubject();
+                    startStudy();
+                    // 시간 보정은 복잡하므로 패스하거나 단순 추가
+                } else {
+                    localStorage.removeItem('temp_study_session');
+                }
+            }
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('history-list');
+            list.innerHTML = "";
+            let totalP = 0, totalT = 0;
+
+            studyLogData.forEach((log, idx) => {
+                totalP += log.count;
+                totalT += log.time;
+                const min = Math.floor(log.time / 60);
+                const div = document.createElement('div');
+                div.className = "bg-white p-4 rounded-2xl shadow-sm border border-slate-100 flex justify-between items-center";
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="bg-teal-100 text-teal-600 font-black text-xs px-2 py-1 rounded-lg">${log.date}</div>
+                        <div>
+                            <div class="text-sm font-bold text-slate-700">${log.subject} <span class="text-slate-400 text-xs">| ${min}분</span></div>
+                            <div class="text-xs text-slate-400">속도: ${log.pace}/분</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl font-black miku-text">${log.count}문제</span>
+                        <button onclick="deleteLog(${idx})" class="text-slate-300 hover:text-rose-500"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+            
+            // 홈 화면 통계 갱신
+            document.getElementById('home-total-problems').innerText = totalP;
+            const avgPace = totalT > 0 ? (totalP / (totalT/60)).toFixed(1) : "0.0";
+            document.getElementById('home-avg-pace').innerText = avgPace;
+        }
+
+        function deleteLog(index) {
+            if(confirm("정말 이 기록을 지울 거야?")) {
+                studyLogData.splice(index, 1);
+                localStorage.setItem(storageKey, JSON.stringify(studyLogData));
+                renderHistory();
+            }
+        }
+
+        function clearAllData() {
+            if(confirm("모든 기록을 초기화할까? (되돌릴 수 없어!)")) {
+                studyLogData = [];
+                localStorage.setItem(storageKey, JSON.stringify(studyLogData));
+                renderHistory();
+            }
+        }
+
+        function logout() {
+            if(confirm("로그아웃 할 거야?")) {
+                if(isStudying) endStudyAndSave(false);
+                currentUser = "";
+                document.getElementById('main-app').classList.remove('flex');
+                document.getElementById('main-app').classList.add('hidden');
+                document.getElementById('lock-screen').classList.remove('hidden');
+                document.getElementById('lock-screen').style.transform = "translateY(0)";
+                document.getElementById('login-pw').value = "";
+                if(player && player.stopVideo) player.stopVideo();
+            }
+        }
+
+        function initBackground() {
+            const bg = document.getElementById('bg-layer');
+            bg.innerHTML = "";
+            const month = new Date().getMonth() + 1;
+            let particleChar = '❄️', animationName = 'fall-sway';
+            let particleCount = 15, fontSizeRange = [15, 30];
+
+            if (month >= 3 && month <= 5) {
+                particleChar = '🌸';
+                animationName = 'fall-rotate';
+            } else if (month >= 6 && month <= 8) {
+                particleChar = '💧';
+                animationName = 'fall-straight';
+                particleCount = 20;
+                fontSizeRange = [10, 20];
+            } else if (month >= 9 && month <= 11) {
+                particleChar = '🍁';
+                animationName = 'fall-rotate';
+            } else {
+                particleChar = '❄️';
+                animationName = 'fall-sway';
+            }
+
+            for(let i=0; i < particleCount; i++) { 
+                const p = document.createElement('div'); 
+                p.className = 'particle'; 
+                p.innerText = particleChar; 
+                p.style.left = Math.random() * 100 + 'vw'; 
+                p.style.fontSize = (Math.random() * (fontSizeRange[1] - fontSizeRange[0]) + fontSizeRange[0]) + 'px';
+                
+                const duration = Math.random() * 5 + 5; 
+                p.style.animation = `${animationName} ${duration}s linear infinite`;
+                p.style.animationDelay = Math.random() * 5 + 's';
+                
+                bg.appendChild(p); 
+            }
+        }
+        
+        window.addEventListener('keydown', (e) => { if(e.code === 'Space' && isStudying) { e.preventDefault(); addCount('manual', 1); } });
+        setInterval(updateTopBar, 1000); updateTopBar();
+
+        // 👇👇 새로 추가된 미쿠의 보안 마법 코드! (개발자 도구 차단) 👇👇
+        // 🚫 보안 기능: F12, 우클릭, 단축키 차단 (미쿠의 보호 마법! ✨)
+        document.addEventListener('keydown', function(e) {
+            // 1. F12 키 차단
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                e.returnValue = false;
+                alert("앗! 개발자 도구는 열 수 없어! 🎵");
+                return false;
+            }
+            
+            // 2. 개발자 도구 단축키 차단 (Ctrl+Shift+I, J, C) & 소스 보기 차단 (Ctrl+U)
+            if (e.ctrlKey && (e.shiftKey && (['I','J','C'].includes(e.key.toUpperCase())) || e.key.toUpperCase() === 'U')) {
+                e.preventDefault();
+                e.returnValue = false;
+                alert("소스 코드는 비밀이야! 에헤헤 ✨");
+                return false;
+            }
+        });
+
+        // 3. 마우스 우클릭 차단 (메뉴 안 뜨게 하기)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            // 우클릭 했을 때 아무 일도 안 일어나게 막았어!
+        });
+    </script>
 </body>
 </html>
